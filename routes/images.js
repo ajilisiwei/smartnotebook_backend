@@ -5,7 +5,6 @@ const MongoDB=require('../utils/mongodb');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    logger.info('there is a req...');
     //查询一条数据
     MongoDB.findOne('user', {_id: '0'}, function (err, res) {
         console.log(res);

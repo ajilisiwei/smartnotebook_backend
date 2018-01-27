@@ -1,8 +1,7 @@
 {
   "user": {
-    "user_id": "Number",
     "user_name": "String",
-    "user_num": "String",
+    "user_no": "String",
     "created_at": "Date",
     "created_by":"Number",
     "last_updated_at":"Date",
@@ -13,6 +12,7 @@
     "content":"String",
     "status":"Number",
     "category":"Number",
+    "user_id":"String",
     "created_at":"Date",
     "created_by":"Number",
     "last_updated_at":"Date",
