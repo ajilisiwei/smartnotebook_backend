@@ -21,7 +21,7 @@ log4js.configure({
     }
 });
 
-exports.getLogger = function(category) {
+module.exports.getLogger = function(category) {
     return log4js.getLogger(category);
 };
 

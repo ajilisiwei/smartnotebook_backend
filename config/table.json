@@ -3,9 +3,7 @@
     "user_name": "String",
     "user_no": "String",
     "created_at": "Date",
-    "created_by":"Number",
-    "last_updated_at":"Date",
-    "last_updated_by":"Number"
+    "last_updated_at":"Date"
   },
   "note":{
     "title":"String",
@@ -14,8 +12,6 @@
     "category":"Number",
     "user_id":"String",
     "created_at":"Date",
-    "created_by":"Number",
-    "last_updated_at":"Date",
-    "last_updated_by":"Number"
+    "last_updated_at":"Date"
   }
 }
