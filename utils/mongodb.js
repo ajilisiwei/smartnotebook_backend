@@ -9,14 +9,9 @@ const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
 const logger = require('pomelo-logger').getLogger('mongodb-log');
+const config=require('../config');
 
-const options = {
-    db_user: "wei",
-    db_pwd: "wei",
-    db_host: "127.0.0.1",
-    db_port: 27017,
-    db_name: "smartbook"
-};
+const options = config.mongodb;
 
 const dbURL = "mongodb://" + options.db_user + ":" + options.db_pwd + "@" + options.db_host + ":" + options.db_port + "/" + options.db_name;
 mongoose.connect(dbURL);
