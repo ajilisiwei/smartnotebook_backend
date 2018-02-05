@@ -268,4 +268,32 @@ DB.prototype.where = function (table_name, conditions, options, callback) {
         });
 };
 
+/**
+ * 分页查询
+ * @param table_name 表名
+ * @param conditions 查询条件 {a:1, b:2}
+ * @param options 选项：{fields: "a b c", sort: {time: -1}, pageIndex: 1, pageSize:10}
+ * @param callback 回调方法
+ */
+DB.prototype.findByPager = function (table_name, conditions, options, callback) {
+    let node_model = this.getConnection(table_name);
+    let size=parseInt(options.pageSize) || 10;
+    let page=parseInt(options.pageIndex) || 1;
+    let limit=size;
+    let skip=(page>0 ? page-1:0) * size;
+    node_model.find(conditions)
+        .select(options.fields || '')
+        .sort(options.sort || {})
+        .skip(skip)
+        .limit(limit)
+        .exec(function (err, res) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, res);
+            }
+        });
+};
+
+
 module.exports = new DB();

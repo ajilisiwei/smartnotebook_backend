@@ -13,16 +13,22 @@ const SIGN_IN_WARN_STR = 'pls sign in first.';
 
 /* GET get notes by user_id. */
 router.get('/list', (req, res) => {
+    let pageIndex=req.query.pageIndex;
+    let pageSize=req.query.pageSize;
+    let options={
+        pageIndex:pageIndex,
+        pageSize:pageSize,
+        sort:{created_at:-1},
+        fields:'_id title content user_id'
+    };
     let user_id = req.session.user_id;
     if (!user_id) res.send(Msg.Fail(SIGN_IN_WARN_STR));
-    DB.find(T_NOTE, {user_id: user_id}, null, (err, data) => {
+    DB.findByPager(T_NOTE, {user_id: user_id}, options, (err, data) => {
         if (err) {
             logger.error(err);
             res.send(Msg.Error());
         }
-        else {
-            res.send(Msg.Success(null, data));
-        }
+        else res.send(Msg.Success(null, data));
     })
 });
 
