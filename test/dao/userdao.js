@@ -5,11 +5,12 @@ const assert = require('assert');
 const MongoDB=require('../../utils/mongodb.js');
 
 describe('User', function() {
+    const user_no=Math.floor(Math.random()*1000+1);
+    let theUser={};
     describe('1.add a user', function() {
         it('should save without error', function(done) {
-            const now=new Date();
-            const user_id=Math.floor(Math.random()*1000+1);
-            const user={user_id:user_id,user_name:'wei',created_at:now,created_by:1,last_updated_at:now,last_updated_by:1};
+            const now=new Date();        
+            const user={user_no:user_no,user_name:'wei',created_at:now,last_updated_at:now};
             MongoDB.save('user',user,(err, res)=>{
                 if (err) throw err;
                 done();
@@ -17,10 +18,9 @@ describe('User', function() {
         });
     });
 
-    let theUser={};
-    describe('1.find a user', function() {
+    describe('2.find a user', function() {
         it('should find without error', function(done) {
-            const condition={user_id:1};
+            const condition={user_no:user_no};
             MongoDB.findOne('user',condition,(err, res)=>{
                 if (err) throw err;
                 theUser=res;
@@ -29,12 +29,23 @@ describe('User', function() {
         });
     });
 
-    describe('1.update a user', function() {
+    describe('3.update a user', function() {
         it('should update without error', function(done) {
             const now=new Date();
-            const condition={_id:theUser._id,user_id:1};
-            const update_fields={user_name:'weiwei',user_num:'D001',last_updated_by:1,last_updated_at:now};
+            const condition={_id:theUser._id};
+            const update_fields={user_name:'weiwei',user_no:'D001',last_updated_at:now};
             MongoDB.update('user',condition,update_fields,(err, res)=>{
+                if (err) throw err;
+                done();
+            });
+        });
+    });
+
+    describe('4.remove a user', function() {
+        it('should remove without error', function(done) {
+            const now=new Date();
+            const condition={_id:theUser._id};
+            MongoDB.remove('user',condition,(err, res)=>{
                 if (err) throw err;
                 done();
             });

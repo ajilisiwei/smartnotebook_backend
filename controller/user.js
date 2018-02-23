@@ -32,6 +32,8 @@ router.get('/:user_id', (req, res) => {
     }
 });
 
+Promise.promisify
+
 /* POST update a user */
 router.post('/',(req,res)=>{
     let user = req.body;
